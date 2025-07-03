@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Confetti Page</title>
+  <link rel="stylesheet" href="estilo.css" />
+
+  <link
+  href="https://fonts.googleapis.com/css2?family=Pacifico&family=Fredoka+One&family=Montserrat:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
+<link 
+  href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@300;400&display=swap" 
+  rel="stylesheet"/>
+
+</head>
+<body>
+  
+  <div class="content">
+    <h1>CONGRATULATIONS ON YOUR GRADUATION</h1>
+    <p><b>I want you to know that I'll be always proud of you no matter what <br> Nico is also proud of you btw</b> </p>
+
+    <img src="img/nico.jpg" alt="nico loves you">
+  </div>
+
+  <button onclick="confettiSpray()">ILY</button>
+
+  <script>
+    function confettiSpray() {
+      const duration = 1 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+
+        confetti(Object.assign({}, defaults, {
+          particleCount: 50,
+          origin: {
+            x: randomInRange(0.1, 0.9),
+            y: Math.random() - 0.2
+          }
+        }));
+      }, 250);
+    }
+
+    // Load confetti script
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js';
+    script.defer = true;
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
